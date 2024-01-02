@@ -1,0 +1,63 @@
+// Define los pines del puente H doble
+const int ENA = 9;   // Velocidad motor A
+const int IN1 = 2;   // Dirección motor A
+const int IN2 = 3;   // Dirección motor A
+const int ENB = 10;  // Velocidad motor B
+const int IN3 = 4;   // Dirección motor B
+const int IN4 = 5;   // Dirección motor B
+
+void setup() {
+  // Inicializa los pines como salidas
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+}
+
+void loop() {
+  // Mueve el motor A hacia adelante a la mitad de velocidad
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 128);  // Valor entre 0 y 255 para la velocidad
+
+  // Mueve el motor B hacia adelante a la mitad de velocidad
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 128);
+
+  delay(2000);  // Espera 2 segundos
+
+  // Detiene ambos motores
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);  // Detiene el motor A
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);  // Detiene el motor B
+
+  delay(2000);  // Espera 2 segundos
+
+  // Mueve el motor A hacia atrás a la mitad de velocidad
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, 128);
+
+  // Mueve el motor B hacia atrás a la mitad de velocidad
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, 128);
+
+  delay(2000);  // Espera 2 segundos
+
+  // Detiene ambos motores nuevamente
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);
+
+  delay(2000);  // Espera 2 segundos
+}
