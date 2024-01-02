@@ -1,0 +1,70 @@
+
+
+#include <SoftwareSerial.h> // Libreria de Tx Rx Serial para Bluetooth 
+#include <Servo.h>// Incluye la Libreria Servo
+
+int bluetoothTx = 0; // bluetooth tx al pin 0
+int bluetoothRx = 1; // bluetooth rx al pin 1
+
+SoftwareSerial bluetooth(bluetoothTx, bluetoothRx);
+
+Servo ser1;
+Servo ser2;
+Servo ser3;
+Servo ser4;
+
+  void setup() {
+  Serial.begin(9600);
+  bluetooth.begin(9600); // Setea la conexion Serial del Bluetooth al Cel
+  ser1.attach(3);
+ ser2.attach(9);
+  ser3.attach(10);
+   ser4.attach(11);
+  }
+ 
+  void loop() {
+  //Lee desde el bluetooth y escribe al USB Serial
+  if(bluetooth.available()>= 0 )
+  {
+    int servopos = bluetooth.read();
+    int servopos1 = bluetooth.read();
+     int realservo = (servopos1 *256) + servopos; 
+    Serial.println(realservo); 
+    
+    if (realservo >= 1000 && realservo <1180){
+    int servo1 = realservo;
+    servo1 = map(servo1, 1000,1180,0,180);
+    ser1.write(servo1);
+    Serial.println(" ON");
+    delay(10);
+
+    
+
+    }
+
+     if (realservo >=2000 && realservo <2180){
+    int servo2 = realservo;
+    servo2 = map(servo2,2000,2180,0,180);
+    ser2.write(servo2);
+    Serial.println(" ON");
+    delay(10);
+      
+    }
+    if (realservo >=3000 && realservo <3180){
+    int servo3 = realservo;
+    servo3 = map(servo3,3000,3180,0,180);
+    ser3.write(servo3);
+    Serial.println(" ON");
+    delay(10);
+  }
+  if (realservo >=4000 && realservo <4180){
+    int servo4 = realservo;
+    servo4 = map(servo4,4000,4180,0,180);
+    ser4.write(servo4);
+    Serial.println("ON");
+    delay(10);
+
+} 
+  }
+  }
+   
