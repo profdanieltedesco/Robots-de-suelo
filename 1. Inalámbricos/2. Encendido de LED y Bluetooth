@@ -1,0 +1,27 @@
+/* prueba de encendido de led a través del monitor
+serial. para pruebas, abrir el monitor serial y digitar 1 para encender el led
+o digitar 2 para apagarlo
+Luego conectar el bluethoot y encender y aappgar desde la app
+Prof. Daniel Tedesco*/
+
+int led=13;// creamos la variable led en el pin 13
+int estado=0; // creamos la variable estado con lectura=0
+
+
+void setup() {
+ Serial.begin(9600);//inicializamos monitor serie
+ pinMode (led, OUTPUT);// seteamos el pin 13 correspondinte al led como salida
+
+}
+
+void loop() {
+  if (Serial.available()>0){ // condicional si el valor del monitor serie es mayor a 0, se lee el estado
+    estado = Serial.read();
+  }
+ if (estado=='1'){ //si el estado es igual a 1 (encendido) se enciende el led
+  digitalWrite(led, HIGH);
+ }
+ if(estado=='2'){ // si el estado es igual a 2, se apaga el led
+  digitalWrite(led, LOW);
+ }
+}
