@@ -1,0 +1,129 @@
+int izqA = 5;
+int izqB = 6;
+int derA = 9;
+int derB = 10;
+int vel = 255;
+int estado = 'c';
+int sensor = A0;
+int led = 3;
+int led1= 2;
+int lectura;
+int rojo = 11;
+int rojo1 = 12;
+int blanco = 4;
+int blanco1 = 7;
+int buz = 8;
+
+void setup() {
+ Serial.begin(9600);
+ pinMode(izqA, OUTPUT);
+  pinMode(izqB, OUTPUT);
+   pinMode(derA, OUTPUT);
+    pinMode(derB, OUTPUT);
+     pinMode(led, OUTPUT);
+    pinMode(led1, OUTPUT);
+    pinMode(13, OUTPUT);
+    pinMode(rojo, OUTPUT);
+    pinMode(rojo1, OUTPUT);
+    pinMode(blanco, OUTPUT);
+    pinMode(blanco1, OUTPUT);
+   pinMode(buz, OUTPUT);
+   
+    digitalWrite(blanco, 1);
+
+   digitalWrite(blanco1, 1);
+   
+   digitalWrite(rojo, 1);
+   
+   digitalWrite(rojo1, 1);
+}
+
+void loop() {
+if(Serial.available()>0){
+  estado = Serial.read();
+ 
+}
+if(estado=='a'){
+  analogWrite(derB, 0);                        //adelante
+  analogWrite(izqB, 0);
+  analogWrite(derA, vel);
+  analogWrite(izqA, vel);
+}
+if(estado=='b'){
+  analogWrite(derB, 0);                        //derecha
+  analogWrite(izqB, 0);
+  analogWrite(derA, vel);
+  analogWrite(izqA, 0);
+}
+if(estado=='c'){
+  analogWrite(derB, 0);                        //parar los motores
+  analogWrite(izqB, 0);
+  analogWrite(derA, 0);
+  analogWrite(izqA, 0);
+}
+if(estado=='d'){
+  analogWrite(derB, 0);                        //izquierda
+  analogWrite(izqB, 0);
+  analogWrite(derA, 0);
+  analogWrite(izqA, vel);
+}
+if(estado=='e'){
+  analogWrite(derB, vel);                        //atras
+  analogWrite(izqB, vel);
+  analogWrite(derA, 0);
+  analogWrite(izqA, 0);
+}
+{
+lectura = analogRead(sensor);
+ Serial.println(lectura);
+ if (lectura <300) {
+  digitalWrite( led, HIGH);
+  digitalWrite( led1, HIGH);
+ 
+  
+ }
+else {
+  digitalWrite( led, LOW);
+  digitalWrite( led1, LOW);
+
+}
+}
+if(estado=='l'){
+  digitalWrite(13, 1);
+}
+if(estado=='m'){
+  digitalWrite(13, 0);
+}
+if(estado=='h'){
+  digitalWrite(derA, 1);
+}
+if(estado=='j'){
+  digitalWrite(derA, 0);
+}
+if(estado=='r'){
+  digitalWrite(derB, 1);
+}
+if(estado=='s'){
+  digitalWrite(derB, 0);
+}
+if(estado=='n'){
+  digitalWrite(izqA, 1);
+}
+if(estado=='k'){
+  digitalWrite(izqA, 0);
+}
+if(estado=='p'){
+  digitalWrite(izqB, 1);
+}
+if(estado=='u'){
+  digitalWrite(izqB, 0);
+}
+if(estado == '1'){
+  digitalWrite(buz, HIGH);
+  
+}
+  if(estado == '2'){
+  digitalWrite(buz, LOW);
+}
+
+}
